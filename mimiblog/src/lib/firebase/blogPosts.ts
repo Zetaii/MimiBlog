@@ -10,7 +10,6 @@ import {
   doc,
   getDoc,
 } from "firebase/firestore"
-import cloudinary from "../cloudinary/config"
 
 export interface BlogPost {
   id?: string

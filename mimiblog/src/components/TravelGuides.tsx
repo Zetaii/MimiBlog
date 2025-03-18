@@ -6,6 +6,7 @@ import {
   type TravelGuide,
 } from "@/lib/firebase/travelGuides"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 const TravelGuides = () => {
   const router = useRouter()
@@ -72,10 +73,12 @@ const TravelGuides = () => {
         >
           {guide.imageUrls[0] && (
             <div className="relative h-[500px]">
-              <img
+              <Image
                 src={guide.imageUrls[0]}
                 alt={guide.title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                priority
               />
             </div>
           )}
@@ -99,7 +102,9 @@ const TravelGuides = () => {
               <button
                 onClick={(e) => {
                   e.stopPropagation()
-                  guide.id && handleDelete(guide.id)
+                  if (guide.id) {
+                    handleDelete(guide.id)
+                  }
                 }}
                 disabled={isDeleting === guide.id}
                 className={`text-red-500 hover:text-red-700 font-medium text-sm transition-colors ${

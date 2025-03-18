@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import { getTravelGuide, type TravelGuide } from "@/lib/firebase/travelGuides"
 import { useParams } from "next/navigation"
+import Image from "next/image"
 
 export default function TravelGuidePage() {
   const params = useParams()
@@ -50,10 +51,12 @@ export default function TravelGuidePage() {
 
         {guide.imageUrls[0] && (
           <div className="relative w-full h-[400px] mb-8">
-            <img
+            <Image
               src={guide.imageUrls[0]}
               alt={guide.title}
-              className="rounded-lg object-cover w-full h-full"
+              fill
+              className="rounded-lg object-cover"
+              priority
             />
           </div>
         )}
@@ -74,10 +77,11 @@ export default function TravelGuidePage() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {guide.imageUrls.slice(1).map((url, index) => (
                 <div key={index} className="relative aspect-square">
-                  <img
+                  <Image
                     src={url}
                     alt={`Image ${index + 2}`}
-                    className="rounded-lg object-cover w-full h-full"
+                    fill
+                    className="rounded-lg object-cover"
                   />
                 </div>
               ))}

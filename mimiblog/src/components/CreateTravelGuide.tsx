@@ -2,6 +2,7 @@
 import React, { ChangeEvent, FormEvent, useState, useEffect } from "react"
 import { createTravelGuide } from "@/lib/firebase/travelGuides"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 interface GuideFormData {
   title: string
@@ -194,10 +195,11 @@ const CreateTravelGuide: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {imageUrls.map((url, index) => (
               <div key={index} className="relative aspect-square">
-                <img
+                <Image
                   src={url}
                   alt={`Preview ${index + 1}`}
-                  className="w-full h-full object-cover rounded-lg"
+                  fill
+                  className="object-cover rounded-lg"
                 />
               </div>
             ))}

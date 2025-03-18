@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link"
 import React, { useState, useEffect } from "react"
+import Image from "next/image"
 
 const NavBar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0)
@@ -35,11 +36,15 @@ const NavBar = () => {
         <div className="text-black font-bold text-4xl flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
             <span>Mimi</span>
-            <img
-              src="/pug-logo.png"
-              alt="Pug Logo"
-              className="h-10 w-10 object-contain"
-            />
+            <div className="relative h-10 w-10">
+              <Image
+                src="/pug-logo.png"
+                alt="Pug Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
           </Link>
         </div>
 

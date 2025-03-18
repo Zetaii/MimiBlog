@@ -6,6 +6,7 @@ import {
   type BlogPost,
 } from "@/lib/firebase/blogPosts"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 const Blogs = () => {
   const router = useRouter()
@@ -74,10 +75,12 @@ const Blogs = () => {
         >
           {post.imageUrls[0] && (
             <div className="relative h-[500px]">
-              <img
+              <Image
                 src={post.imageUrls[0]}
                 alt={post.title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                priority
               />
             </div>
           )}
@@ -97,7 +100,9 @@ const Blogs = () => {
               <button
                 onClick={(e) => {
                   e.stopPropagation()
-                  post.id && handleDelete(post.id)
+                  if (post.id) {
+                    handleDelete(post.id)
+                  }
                 }}
                 disabled={isDeleting === post.id}
                 className={`text-red-500 hover:text-red-700 font-medium text-sm transition-colors ${
