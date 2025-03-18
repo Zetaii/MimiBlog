@@ -42,17 +42,15 @@ const Hero = () => {
       </div>
 
       {/* Right image */}
-      <div className="flex-1 relative min-h-[50vh] lg:min-h-[90vh]">
-        <div className="relative w-full h-full">
-          <Image
-            src="/hero-image.png"
-            alt="Travel Adventure"
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover"
-            priority
-          />
-        </div>
+      <div className="flex-1 relative h-[50vh] lg:h-[95vh]">
+        <Image
+          src="/hero-image.png"
+          alt="Travel Adventure"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover"
+          priority
+        />
       </div>
     </div>
   )
