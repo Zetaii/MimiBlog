@@ -8,20 +8,20 @@ const playfair = Playfair_Display({ subsets: ["latin"] })
 
 const Hero = () => {
   return (
-    <div className="relative flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 min-h-[80vh] border-b border-black">
+    <div className="relative flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 min-h-[95vh] border-b border-black">
       {/* Left content */}
-      <div className="flex-1 text-center lg:text-left lg:pl-24 py-12">
-        <div className="flex items-center justify-center lg:justify-start gap-2 mb-4">
+      <div className="flex-1 text-center lg:text-left lg:pl-24 py-16">
+        <div className="flex items-center justify-center lg:justify-start gap-2 mb-6">
           <span className="px-3 py-1 bg-black text-white text-sm font-medium tracking-wider rounded-full">
             TRAVEL & LIFESTYLE
           </span>
         </div>
         <h1
-          className={`${playfair.className} text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-black leading-tight`}
+          className={`${playfair.className} text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-black leading-tight`}
         >
           Welcome to Mimi&apos;s World
         </h1>
-        <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto lg:mx-0 tracking-wide">
+        <p className="text-lg md:text-xl text-gray-700 mb-10 max-w-2xl mx-auto lg:mx-0 tracking-wide">
           Join me on my adventures as I explore the world, share travel tips,
           and document life&apos;s beautiful moments.
         </p>
@@ -42,7 +42,7 @@ const Hero = () => {
       </div>
 
       {/* Right image */}
-      <div className="flex-1 w-full max-w-2xl h-[80vh]">
+      <div className="flex-1 relative min-h-[50vh] lg:min-h-[90vh]">
         <div className="relative w-full h-full">
           <Image
             src="/hero-image.png"

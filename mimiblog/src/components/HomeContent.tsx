@@ -90,13 +90,13 @@ export default function HomeContent({
             <h2 className="text-3xl font-bold mb-8">Recent Blogs</h2>
             <div className="relative mb-12">
               <div className="w-full h-[2px] bg-black"></div>
-              <div className="text-left text-black mt-3 mb-3">
-                My thoughts |{" "}
+              <div className="text-left text-sm text-black mt-3 mb-3">
+                My Thoughts |{" "}
                 <Link
                   href="/blogs"
                   className="text-blue-600 hover:text-blue-800"
                 >
-                  View More Blogs
+                  View All Blogs
                 </Link>
               </div>
               <div className="w-full h-[2px] bg-black"></div>
@@ -114,13 +114,13 @@ export default function HomeContent({
             <h2 className="text-3xl font-bold mb-8">Recent Travel Guides</h2>
             <div className="relative mb-12">
               <div className="w-full h-[2px] bg-black"></div>
-              <div className="text-left text-black mt-3 mb-3">
-                My adventures |{" "}
+              <div className="text-left text-sm text-black mt-3 mb-3">
+                My Adventures |{" "}
                 <Link
                   href="/travel-guides"
                   className="text-blue-600 hover:text-blue-800"
                 >
-                  View More Travel Guides
+                  View All Travel Guides
                 </Link>
               </div>
               <div className="w-full h-[2px] bg-black"></div>
