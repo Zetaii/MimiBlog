@@ -23,11 +23,14 @@ export default function AboutPage() {
           {/* Content Section */}
           <div className="md:col-span-2 space-y-6">
             <div className="prose max-w-none">
-              <h2 className="text-2xl font-semibold mb-4">Hi, I'm Mimi!</h2>
+              <h2 className="text-2xl font-semibold mb-4">
+                Hi, I&apos;m Mimi!
+              </h2>
 
               <p className="text-gray-600 mb-4">
-                Welcome to my blog! I'm passionate about sharing my experiences
-                and insights about travel, culture, and life's adventures.
+                Welcome to my blog! I&apos;m passionate about sharing my
+                experiences and insights about travel, culture, and life&apos;s
+                adventures.
               </p>
 
               <h3 className="text-xl font-semibold mb-3">My Story</h3>

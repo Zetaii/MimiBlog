@@ -48,10 +48,12 @@ export default function BlogPostPage() {
 
         {post.imageUrls[0] && (
           <div className="relative w-full h-[400px] mb-8">
-            <img
+            <Image
               src={post.imageUrls[0]}
               alt={post.title}
-              className="rounded-lg object-cover w-full h-full"
+              fill
+              className="rounded-lg object-cover"
+              priority
             />
           </div>
         )}
@@ -72,10 +74,11 @@ export default function BlogPostPage() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {post.imageUrls.slice(1).map((url, index) => (
                 <div key={index} className="relative aspect-square">
-                  <img
+                  <Image
                     src={url}
                     alt={`Image ${index + 2}`}
-                    className="rounded-lg object-cover w-full h-full"
+                    fill
+                    className="rounded-lg object-cover"
                   />
                 </div>
               ))}

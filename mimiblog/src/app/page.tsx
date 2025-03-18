@@ -1,8 +1,10 @@
 "use client"
 import React, { useEffect, useState } from "react"
-import { getBlogPosts, type BlogPost } from "@/lib/firebase/blogPosts"
-import { getTravelGuides, type TravelGuide } from "@/lib/firebase/travelGuides"
+import { getBlogPosts } from "@/lib/firebase/blogPosts"
+import { getTravelGuides } from "@/lib/firebase/travelGuides"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
+import { Timestamp } from "firebase/firestore"
 
 type CombinedPost = {
   id: string
@@ -10,7 +12,7 @@ type CombinedPost = {
   title: string
   description: string
   imageUrls: string[]
-  createdAt: any // Using Firebase Timestamp type
+  createdAt: Timestamp
   location?: string
   duration?: string
 }
@@ -32,10 +34,12 @@ export default function HomePage() {
         const combinedPosts: CombinedPost[] = [
           ...blogs.map((blog) => ({
             ...blog,
+            id: blog.id || "",
             type: "blog" as const,
           })),
           ...guides.map((guide) => ({
             ...guide,
+            id: guide.id || "",
             type: "guide" as const,
           })),
         ]
@@ -85,10 +89,12 @@ export default function HomePage() {
             >
               {post.imageUrls[0] && (
                 <div className="relative h-[500px]">
-                  <img
+                  <Image
                     src={post.imageUrls[0]}
                     alt={post.title}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    priority
                   />
                 </div>
               )}
