@@ -199,6 +199,7 @@ const CreateTravelGuide: React.FC = () => {
                   src={url}
                   alt={`Preview ${index + 1}`}
                   fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                   className="object-cover rounded-lg"
                 />
               </div>

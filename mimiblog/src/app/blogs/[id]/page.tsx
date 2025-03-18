@@ -52,6 +52,7 @@ export default function BlogPostPage() {
               src={post.imageUrls[0]}
               alt={post.title}
               fill
+              sizes="100vw"
               className="rounded-lg object-cover"
               priority
             />
@@ -78,6 +79,7 @@ export default function BlogPostPage() {
                     src={url}
                     alt={`Image ${index + 2}`}
                     fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
                     className="rounded-lg object-cover"
                   />
                 </div>

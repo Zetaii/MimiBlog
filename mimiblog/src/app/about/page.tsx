@@ -14,6 +14,7 @@ export default function AboutPage() {
                 src="/profile-image.jpg" // Add profile image to public folder
                 alt="Profile"
                 fill
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover"
                 priority
               />

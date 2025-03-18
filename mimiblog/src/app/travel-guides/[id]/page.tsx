@@ -55,6 +55,7 @@ export default function TravelGuidePage() {
               src={guide.imageUrls[0]}
               alt={guide.title}
               fill
+              sizes="100vw"
               className="rounded-lg object-cover"
               priority
             />
@@ -81,6 +82,7 @@ export default function TravelGuidePage() {
                     src={url}
                     alt={`Image ${index + 2}`}
                     fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
                     className="rounded-lg object-cover"
                   />
                 </div>

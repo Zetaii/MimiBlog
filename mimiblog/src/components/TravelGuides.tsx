@@ -1,124 +1,75 @@
 "use client"
-import React, { useEffect, useState } from "react"
-import {
-  getTravelGuides,
-  deleteTravelGuide,
-  type TravelGuide,
-} from "@/lib/firebase/travelGuides"
-import { useRouter } from "next/navigation"
+import React from "react"
 import Image from "next/image"
+import Link from "next/link"
 
-const TravelGuides = () => {
-  const router = useRouter()
-  const [guides, setGuides] = useState<TravelGuide[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [isDeleting, setIsDeleting] = useState<string | null>(null)
+interface TravelGuide {
+  id: string
+  title: string
+  description: string
+  content: string
+  location: string
+  duration: string
+  imageUrls: string[]
+  createdAt: Date
+}
 
-  const fetchGuides = async () => {
+interface TravelGuidesProps {
+  post: TravelGuide
+}
+
+export default function TravelGuides({ post }: TravelGuidesProps) {
+  if (!post) return null
+
+  const formatDate = (date: Date) => {
     try {
-      const fetchedGuides = await getTravelGuides()
-      setGuides(fetchedGuides)
-    } catch (err) {
-      setError("Failed to fetch travel guides")
-      console.error(err)
-    } finally {
-      setLoading(false)
+      return date.toLocaleDateString()
+    } catch (error) {
+      console.error("Error formatting date:", error)
+      return "Date unavailable"
     }
-  }
-
-  useEffect(() => {
-    fetchGuides()
-  }, [])
-
-  const handleDelete = async (guideId: string) => {
-    if (!window.confirm("Are you sure you want to delete this travel guide?")) {
-      return
-    }
-
-    setIsDeleting(guideId)
-    try {
-      await deleteTravelGuide(guideId)
-      await fetchGuides()
-    } catch (err) {
-      console.error("Failed to delete guide:", err)
-      setError("Failed to delete guide. Please try again.")
-    } finally {
-      setIsDeleting(null)
-    }
-  }
-
-  const handleCardClick = (guideId: string, event: React.MouseEvent) => {
-    if ((event.target as HTMLElement).closest("button")) {
-      return
-    }
-    router.push(`/travel-guides/${guideId}`)
-  }
-
-  if (loading) {
-    return <div className="text-center">Loading...</div>
-  }
-
-  if (error) {
-    return <div className="text-red-500">{error}</div>
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-      {guides.map((guide) => (
-        <div
-          key={guide.id}
-          onClick={(e) => guide.id && handleCardClick(guide.id, e)}
-          className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer h-[600px] bg-white"
-        >
-          {guide.imageUrls[0] && (
-            <div className="relative h-[500px]">
-              <Image
-                src={guide.imageUrls[0]}
-                alt={guide.title}
-                fill
-                className="object-cover"
-                priority
-              />
+    <Link href={`/travel-guides/${post.id}`} className="block">
+      <div className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer h-[600px] bg-white">
+        {post.imageUrls[0] && (
+          <div className="relative h-[500px]">
+            <Image
+              src={post.imageUrls[0]}
+              alt={post.title}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover"
+              priority
+            />
+          </div>
+        )}
+        <div className="p-6 flex flex-col h-[100px]">
+          <div className="flex justify-between items-start mb-2">
+            <h2 className="text-2xl font-semibold line-clamp-1">
+              {post.title}
+            </h2>
+            <div className="flex items-center text-sm text-gray-500 space-x-3">
+              <span>📍 {post.location}</span>
+              <span>⏱ {post.duration}</span>
             </div>
-          )}
-          <div className="p-6 flex flex-col h-[100px]">
-            <div className="flex justify-between items-start mb-2">
-              <h2 className="text-2xl font-semibold line-clamp-1">
-                {guide.title}
-              </h2>
-              <div className="flex items-center text-sm text-gray-500 space-x-3">
-                <span>📍 {guide.location}</span>
-                <span>⏱ {guide.duration}</span>
-              </div>
-            </div>
-            <p className="text-gray-600 line-clamp-2 mb-2 flex-grow">
-              {guide.description}
-            </p>
-            <div className="flex justify-between items-center">
+          </div>
+          <p className="text-gray-600 line-clamp-2 mb-2 flex-grow">
+            {post.description}
+          </p>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-4">
               <div className="text-sm text-gray-500">
-                {guide.createdAt.toDate().toLocaleDateString()}
+                {formatDate(post.createdAt)}
               </div>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  if (guide.id) {
-                    handleDelete(guide.id)
-                  }
-                }}
-                disabled={isDeleting === guide.id}
-                className={`text-red-500 hover:text-red-700 font-medium text-sm transition-colors ${
-                  isDeleting === guide.id ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                {isDeleting === guide.id ? "Deleting..." : "Delete"}
-              </button>
+              <span className="text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors">
+                Read More →
+              </span>
             </div>
           </div>
         </div>
-      ))}
-    </div>
+      </div>
+    </Link>
   )
 }
-
-export default TravelGuides

@@ -1,122 +1,70 @@
 "use client"
-import React, { useEffect, useState } from "react"
-import {
-  getBlogPosts,
-  deleteBlogPost,
-  type BlogPost,
-} from "@/lib/firebase/blogPosts"
-import { useRouter } from "next/navigation"
+import React from "react"
 import Image from "next/image"
+import Link from "next/link"
 
-const Blogs = () => {
-  const router = useRouter()
-  const [posts, setPosts] = useState<BlogPost[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [isDeleting, setIsDeleting] = useState<string | null>(null)
+interface BlogPost {
+  id: string
+  title: string
+  description: string
+  content: string
+  imageUrls: string[]
+  createdAt: Date
+}
 
-  const fetchPosts = async () => {
+interface BlogsProps {
+  post: BlogPost
+}
+
+export default function Blogs({ post }: BlogsProps) {
+  if (!post) return null
+
+  const formatDate = (date: Date) => {
     try {
-      const fetchedPosts = await getBlogPosts()
-      setPosts(fetchedPosts)
-    } catch (err) {
-      setError("Failed to fetch blog posts")
-      console.error(err)
-    } finally {
-      setLoading(false)
+      return date.toLocaleDateString()
+    } catch (error) {
+      console.error("Error formatting date:", error)
+      return "Date unavailable"
     }
-  }
-
-  useEffect(() => {
-    fetchPosts()
-  }, [])
-
-  const handleDelete = async (postId: string) => {
-    if (!window.confirm("Are you sure you want to delete this blog post?")) {
-      return
-    }
-
-    setIsDeleting(postId)
-    try {
-      await deleteBlogPost(postId)
-      // Refresh the posts list
-      await fetchPosts()
-    } catch (err) {
-      console.error("Failed to delete post:", err)
-      setError("Failed to delete post. Please try again.")
-    } finally {
-      setIsDeleting(null)
-    }
-  }
-
-  const handleCardClick = (postId: string, event: React.MouseEvent) => {
-    // Prevent navigation if clicking the delete button
-    if ((event.target as HTMLElement).closest("button")) {
-      return
-    }
-    router.push(`/blogs/${postId}`)
-  }
-
-  if (loading) {
-    return <div className="text-center">Loading...</div>
-  }
-
-  if (error) {
-    return <div className="text-red-500">{error}</div>
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-      {posts.map((post) => (
-        <div
-          key={post.id}
-          onClick={(e) => post.id && handleCardClick(post.id, e)}
-          className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer h-[600px] bg-white"
-        >
-          {post.imageUrls[0] && (
-            <div className="relative h-[500px]">
-              <Image
-                src={post.imageUrls[0]}
-                alt={post.title}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          )}
-          <div className="p-6 flex flex-col h-[100px]">
-            <div className="flex justify-between items-start mb-2">
-              <h2 className="text-2xl font-semibold line-clamp-1">
-                {post.title}
-              </h2>
-            </div>
-            <p className="text-gray-600 line-clamp-2 mb-2 flex-grow">
-              {post.description}
-            </p>
-            <div className="flex justify-between items-center">
+    <Link href={`/blogs/${post.id}`} className="block h-full">
+      <div className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer bg-white h-full flex flex-col">
+        {post.imageUrls[0] && (
+          <div className="relative w-full" style={{ height: "350px" }}>
+            <Image
+              src={post.imageUrls[0]}
+              alt={post.title}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover"
+              priority
+              onError={(e) => {
+                console.error(`Error loading blog image: ${post.imageUrls[0]}`)
+                const imgElement = e.target as HTMLImageElement
+                imgElement.src = "/placeholder-image.jpg"
+              }}
+            />
+          </div>
+        )}
+        <div className="p-6 flex flex-col flex-grow">
+          <div className="flex-grow">
+            <h2 className="text-2xl font-semibold mb-3">{post.title}</h2>
+            <p className="text-gray-600">{post.description}</p>
+          </div>
+          <div className="flex justify-between items-center pt-4 mt-4 border-t border-gray-200">
+            <div className="flex items-center gap-4">
               <div className="text-sm text-gray-500">
-                {post.createdAt.toDate().toLocaleDateString()}
+                {formatDate(post.createdAt)}
               </div>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  if (post.id) {
-                    handleDelete(post.id)
-                  }
-                }}
-                disabled={isDeleting === post.id}
-                className={`text-red-500 hover:text-red-700 font-medium text-sm transition-colors ${
-                  isDeleting === post.id ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                {isDeleting === post.id ? "Deleting..." : "Delete"}
-              </button>
+              <span className="text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors">
+                Read More →
+              </span>
             </div>
           </div>
         </div>
-      ))}
-    </div>
+      </div>
+    </Link>
   )
 }
-
-export default Blogs
