@@ -19,11 +19,11 @@ const Hero = () => {
         <h1
           className={`${playfair.className} text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-black leading-tight`}
         >
-          Welcome to Mimi's World
+          Welcome to Mimi&apos;s World
         </h1>
         <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto lg:mx-0 tracking-wide">
           Join me on my adventures as I explore the world, share travel tips,
-          and document life's beautiful moments.
+          and document life&apos;s beautiful moments.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
           <Link

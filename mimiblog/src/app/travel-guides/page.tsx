@@ -4,11 +4,14 @@ import { getTravelGuides } from "@/lib/firebase/travelGuides"
 export default async function TravelGuidesPage() {
   const guides = await getTravelGuides()
 
-  // Convert Firestore Timestamps to plain Date objects
-  const serializedGuides = guides.map((guide) => ({
-    ...guide,
-    createdAt: new Date(guide.createdAt.toDate().toISOString()),
-  }))
+  // Convert Firestore Timestamps to plain Date objects and ensure id is present
+  const serializedGuides = guides
+    .filter((guide) => guide.id) // Only include guides with an id
+    .map((guide) => ({
+      ...guide,
+      id: guide.id!, // The '!' tells TypeScript that we know id exists (due to the filter)
+      createdAt: new Date(guide.createdAt.toDate().toISOString()),
+    }))
 
   return (
     <main className="min-h-screen">

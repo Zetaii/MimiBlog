@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={playfair.className} suppressHydrationWarning>
       <body
         className={`${inter.className} antialiased min-h-screen bg-gray-200`}
         suppressHydrationWarning

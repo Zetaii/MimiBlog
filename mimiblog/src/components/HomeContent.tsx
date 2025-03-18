@@ -6,9 +6,30 @@ import TravelGuides from "@/components/TravelGuides"
 import Link from "next/link"
 import Image from "next/image"
 
+// Define local interfaces that match the component's needs
+interface BlogPostWithId {
+  id: string
+  title: string
+  description: string
+  content: string
+  imageUrls: string[]
+  createdAt: Date
+}
+
+interface TravelGuideWithId {
+  id: string
+  title: string
+  description: string
+  content: string
+  location: string
+  duration: string
+  imageUrls: string[]
+  createdAt: Date
+}
+
 interface HomeContentProps {
-  recentBlogs: any[]
-  recentGuides: any[]
+  recentBlogs: BlogPostWithId[]
+  recentGuides: TravelGuideWithId[]
 }
 
 export default function HomeContent({
@@ -118,7 +139,7 @@ export default function HomeContent({
             <div className="relative">
               <div className="w-full h-[2px] bg-black"></div>
               <div className="text-left text-black mt-4 mb-2">
-                Let's connect |{" "}
+                Let&apos;s connect |{" "}
                 <Link
                   href="https://instagram.com/mimi"
                   target="_blank"
@@ -245,7 +266,7 @@ export default function HomeContent({
                       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                       className="object-cover hover:grayscale transition-all duration-500"
                       loading="eager"
-                      onError={(e) => {
+                      onError={() => {
                         console.error(
                           `Error loading Instagram image: ${post.image}`
                         )
@@ -269,7 +290,7 @@ export default function HomeContent({
             <div className="relative">
               <div className="w-full h-[2px] bg-black"></div>
               <div className="text-left text-black mt-4 mb-2">
-                Let's collaborate |{" "}
+                Let&apos;s collaborate |{" "}
                 <Link
                   href="mailto:your-email@example.com"
                   className="text-blue-600 hover:text-blue-800"
@@ -282,9 +303,10 @@ export default function HomeContent({
             <div className="bg-gray-100 rounded-lg p-8 mt-8">
               <div className="max-w-2xl mx-auto text-center">
                 <p className="text-lg text-gray-700 mb-6">
-                  I'm always excited to collaborate on new projects and create
-                  amazing content together. Whether you're a brand, fellow
-                  creator, or just want to say hi, I'd love to hear from you!
+                  I&apos;m always excited to collaborate on new projects and
+                  create amazing content together. Whether you&apos;re a brand,
+                  fellow creator, or just want to say hi, I&apos;d love to hear
+                  from you!
                 </p>
                 <Link
                   href="mailto:your-email@example.com"
