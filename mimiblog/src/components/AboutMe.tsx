@@ -25,7 +25,7 @@ const AboutMe = () => {
           <div className="w-full md:w-1/3 flex justify-center">
             <div className="relative w-64 h-80 overflow-hidden rounded-lg shadow-lg border-2 border-black">
               <Image
-                src="/about-me.jpg"
+                src="/aboutme.jpg"
                 alt="Mimi Portrait"
                 fill
                 className="object-cover"
