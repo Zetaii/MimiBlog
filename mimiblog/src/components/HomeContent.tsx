@@ -1,6 +1,7 @@
 "use client"
 import React from "react"
-import Hero from "@/components/Hero"
+import Hero2 from "@/components/Hero2"
+import AboutMe from "@/components/AboutMe"
 import Blogs from "@/components/Blogs"
 import TravelGuides from "@/components/TravelGuides"
 import Link from "next/link"
@@ -83,8 +84,9 @@ export default function HomeContent({
     <div className="min-h-screen bg-gray-200">
       <div className="max-w-[1850px] mx-auto bg-white shadow-lg mt-8 border border-black">
         <div className="pt-8">
-          <Hero />
+          <Hero2 />
         </div>
+        <AboutMe />
         <div className="px-12 py-8">
           <section className="mb-16">
             <h2 className="text-3xl font-bold mb-8 font-serif">Recent Blogs</h2>
