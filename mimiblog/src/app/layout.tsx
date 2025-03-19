@@ -1,19 +1,15 @@
-import { Metadata } from "next"
-import { Inter, Playfair_Display } from "next/font/google"
+import type { Metadata } from "next"
+import { Playfair_Display } from "next/font/google"
+import "./globals.css"
 import NavBar from "@/components/NavBar"
 import Footer from "@/components/Footer"
-import "./globals.css"
+import ClientLayout from "@/components/ClientLayout"
 
-const inter = Inter({ subsets: ["latin"] })
 const playfair = Playfair_Display({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Mimi's Blog",
-  description: "Just a girlie",
-  icons: {
-    icon: "/pug-logo.png",
-    apple: "/pug-logo.png",
-  },
+  title: "Mimi Blog",
+  description: "A travel and lifestyle blog",
 }
 
 export default function RootLayout({
@@ -24,12 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={playfair.className} suppressHydrationWarning>
       <body
-        className={`${inter.className} antialiased min-h-screen bg-gray-200`}
-        suppressHydrationWarning
+        className={`${playfair.className} antialiased min-h-screen bg-gray-200`}
       >
-        <NavBar />
-        <main>{children}</main>
-        <Footer />
+        <div className="flex flex-col min-h-screen">
+          <NavBar />
+          <main className="flex-grow">
+            <ClientLayout>{children}</ClientLayout>
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   )

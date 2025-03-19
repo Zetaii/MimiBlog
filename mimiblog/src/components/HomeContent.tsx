@@ -72,10 +72,10 @@ export default function HomeContent({
       {
         id: 1,
         image: "/instagram-1.jpg",
-        caption: "Beautiful sunset",
+        caption: "Closeup",
       },
-      { id: 2, image: "/instagram-2.jpg", caption: "City views" },
-      { id: 3, image: "/instagram-3.jpg", caption: "Beach day" },
+      { id: 2, image: "/instagram-2.jpg", caption: "The letter C" },
+      { id: 3, image: "/instagram-3.jpg", caption: "Live" },
     ],
   }
 
@@ -87,10 +87,10 @@ export default function HomeContent({
         </div>
         <div className="px-12 py-8">
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8">Recent Blogs</h2>
+            <h2 className="text-3xl font-bold mb-8 font-serif">Recent Blogs</h2>
             <div className="relative mb-12">
               <div className="w-full h-[2px] bg-black"></div>
-              <div className="text-left text-sm text-black mt-3 mb-3">
+              <div className="text-left text-sm text-black mt-3 mb-3 font-serif">
                 My Thoughts |{" "}
                 <Link
                   href="/blogs"
@@ -102,7 +102,7 @@ export default function HomeContent({
               <div className="w-full h-[2px] bg-black"></div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-12">
-              {recentBlogs.map((post) => (
+              {recentBlogs.slice(0, 3).map((post) => (
                 <Blogs key={post.id} post={post} />
               ))}
             </div>
@@ -111,10 +111,12 @@ export default function HomeContent({
           <div className="border-t-1 border-gray-600 my-20 -mx-12"></div>
 
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8">Recent Travel Guides</h2>
+            <h2 className="text-3xl font-bold mb-8 font-serif">
+              Recent Travel Guides
+            </h2>
             <div className="relative mb-12">
               <div className="w-full h-[2px] bg-black"></div>
-              <div className="text-left text-sm text-black mt-3 mb-3">
+              <div className="text-left text-sm text-black mt-3 mb-3 font-serif">
                 My Adventures |{" "}
                 <Link
                   href="/travel-guides"
@@ -135,10 +137,10 @@ export default function HomeContent({
           <div className="border-t-1 border-gray-600 my-20 -mx-12"></div>
 
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-4">Social Media</h2>
+            <h2 className="text-3xl font-bold mb-4 font-serif">Social Media</h2>
             <div className="relative">
               <div className="w-full h-[2px] bg-black"></div>
-              <div className="text-left text-black mt-4 mb-2">
+              <div className="text-left text-black mt-4 mb-2 font-serif">
                 Let&apos;s connect |{" "}
                 <Link
                   href="https://instagram.com/mimi"
@@ -156,36 +158,36 @@ export default function HomeContent({
               <Link
                 href="https://instagram.com/mimi"
                 target="_blank"
-                className="flex items-center justify-center p-6 bg-black rounded-lg text-white hover:opacity-90 transition-opacity"
+                className="flex items-center justify-center p-6 bg-black rounded-lg text-white hover:opacity-90 transition-opacity font-serif"
               >
                 <span className="text-xl font-semibold">Instagram</span>
               </Link>
               <Link
                 href="https://tiktok.com/@mimi"
                 target="_blank"
-                className="flex items-center justify-center p-6 bg-black rounded-lg text-white hover:opacity-90 transition-opacity"
+                className="flex items-center justify-center p-6 bg-black rounded-lg text-white hover:opacity-90 transition-opacity font-serif"
               >
                 <span className="text-xl font-semibold">TikTok</span>
               </Link>
               <Link
                 href="https://youtube.com/@mimi"
                 target="_blank"
-                className="flex items-center justify-center p-6 bg-black rounded-lg text-white hover:opacity-90 transition-opacity"
+                className="flex items-center justify-center p-6 bg-black rounded-lg text-white hover:opacity-90 transition-opacity font-serif"
               >
                 <span className="text-xl font-semibold">YouTube</span>
               </Link>
             </div>
 
             {/* TikTok Videos */}
-            <div className="mb-16 bg-gradient-to-br from-zinc-900 to-black rounded-2xl p-8 shadow-xl">
-              <h3 className="text-3xl font-bold mb-6 text-white">
+            <div className="mb-16 bg-white p-8 shadow-md border-2 border-black">
+              <h3 className="text-3xl font-bold mb-6 text-black font-serif">
                 Latest TikToks
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 {socialContent.tiktok.map((video) => (
                   <div
                     key={video.id}
-                    className="relative aspect-[9/16] bg-zinc-800 rounded-xl overflow-hidden group w-full max-w-[200px] mx-auto transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                    className="relative aspect-[9/16] bg-white rounded-xl overflow-hidden group w-full max-w-[200px] mx-auto transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-2 border-black"
                   >
                     <Image
                       src={video.thumbnail}
@@ -202,9 +204,11 @@ export default function HomeContent({
                         imgElement.src = `/instagram-${video.id}.jpg`
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent">
                       <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
-                        <p className="font-medium text-sm">{video.title}</p>
+                        <p className="font-medium text-sm font-serif">
+                          {video.title}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -214,7 +218,7 @@ export default function HomeContent({
 
             {/* YouTube Videos */}
             <div className="mb-16 bg-white rounded-2xl p-8 shadow-xl border border-zinc-200">
-              <h3 className="text-3xl font-bold mb-6 text-black">
+              <h3 className="text-3xl font-bold mb-6 text-black font-serif">
                 Latest Videos
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -240,7 +244,9 @@ export default function HomeContent({
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent">
                       <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                        <p className="font-medium text-lg">{video.title}</p>
+                        <p className="font-medium text-lg font-serif">
+                          {video.title}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -249,21 +255,21 @@ export default function HomeContent({
             </div>
 
             {/* Instagram Posts */}
-            <div className="mb-16 bg-gradient-to-br from-black to-zinc-900 rounded-2xl p-8 shadow-xl">
-              <h3 className="text-3xl font-bold mb-6 text-white">
+            <div className="mb-24 bg-white rounded p-12 pt-14 pb-16 shadow-lg border-2 border-black">
+              <h3 className="text-4xl font-bold mb-10 text-black font-serif">
                 Instagram Feed
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8">
                 {socialContent.instagram.map((post) => (
                   <div
                     key={post.id}
-                    className="relative aspect-square bg-zinc-800 rounded-xl overflow-hidden group transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                    className="relative aspect-[3/4] bg-white overflow-hidden group transform transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-200"
                   >
                     <Image
                       src={post.image}
                       alt={post.caption}
                       fill
-                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                      sizes="(max-width: 640px) 90vw, (max-width: 768px) 45vw, (max-width: 1200px) 30vw, 350px"
                       className="object-cover hover:grayscale transition-all duration-500"
                       loading="eager"
                       onError={() => {
@@ -272,9 +278,11 @@ export default function HomeContent({
                         )
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                        <p className="text-sm font-medium">{post.caption}</p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-5 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p className="text-base font-medium font-serif">
+                          {post.caption}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -285,35 +293,27 @@ export default function HomeContent({
 
           <div className="border-t-2 border-black my-12 -mx-12"></div>
 
-          <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-4">Want to Work Together?</h2>
-            <div className="relative">
-              <div className="w-full h-[2px] bg-black"></div>
-              <div className="text-left text-black mt-4 mb-2">
-                Let&apos;s collaborate |{" "}
+          <section className="h-[100vh] flex flex-col">
+            <div className="flex flex-col md:flex-row h-full">
+              <div className="flex-1 flex flex-col items-center justify-center">
+                <h2 className="text-2xl font-bold mb-10 font-serif text-center">
+                  Want to Work Together?
+                </h2>
                 <Link
                   href="mailto:your-email@example.com"
-                  className="text-blue-600 hover:text-blue-800"
+                  className="inline-block px-12 py-2 border-black border-2 bg-white text-black font-medium rounded-sm hover:bg-gray-800 transition-colors duration-300 font-serif text-sm"
                 >
-                  Get in touch
+                  Let&apos;s Connect
                 </Link>
               </div>
-              <div className="w-full h-[2px] bg-black"></div>
-            </div>
-            <div className="bg-gray-100 rounded-lg p-8 mt-8">
-              <div className="max-w-2xl mx-auto text-center">
-                <p className="text-lg text-gray-700 mb-6">
-                  I&apos;m always excited to collaborate on new projects and
-                  create amazing content together. Whether you&apos;re a brand,
-                  fellow creator, or just want to say hi, I&apos;d love to hear
-                  from you!
-                </p>
-                <Link
-                  href="mailto:your-email@example.com"
-                  className="inline-block px-8 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors duration-300"
-                >
-                  Email Me
-                </Link>
+              <div className="flex-1 relative h-full w-full">
+                <Image
+                  src="/hero-image.png"
+                  alt="Collaboration"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
             </div>
           </section>
