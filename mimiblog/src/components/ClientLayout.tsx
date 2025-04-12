@@ -4,6 +4,7 @@ import { ReactNode, useState, useEffect, useRef, Suspense } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { usePathname, useSearchParams } from "next/navigation"
 import PageTransition from "./PageTransition"
+import LenisProvider from "./LenisProvider"
 
 // Create a separate component that uses useSearchParams
 function TransitionController({ children }: { children: ReactNode }) {
@@ -102,8 +103,10 @@ interface ClientLayoutProps {
 
 export default function ClientLayout({ children }: ClientLayoutProps) {
   return (
-    <Suspense fallback={<LoadingFallback />}>
-      <TransitionController>{children}</TransitionController>
-    </Suspense>
+    <LenisProvider>
+      <Suspense fallback={<LoadingFallback />}>
+        <TransitionController>{children}</TransitionController>
+      </Suspense>
+    </LenisProvider>
   )
 }

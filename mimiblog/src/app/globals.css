@@ -19,8 +19,154 @@
   }
 }
 
+html {
+  /* Remove scroll-behavior as Lenis will handle smooth scrolling */
+}
+
 body {
   color: black;
 }
 
 /* Add any global styles below */
+
+/* SideScroll Component Styles */
+.sidescroll-section {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.sidescroll-header {
+  padding: 4rem 0;
+  background-color: white;
+  text-align: center;
+}
+
+.sidescroll-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.sidescroll-divider {
+  height: 2px;
+  width: 100%;
+  background-color: black;
+  margin: 0.75rem 0;
+}
+
+.sidescroll-subtitle {
+  font-size: 0.875rem;
+  margin: 0.75rem 0;
+}
+
+.sidescroll-carousel {
+  width: 100%;
+  background-color: #171717;
+  position: relative;
+}
+
+.sidescroll-viewport {
+  height: 300vh;
+  position: relative;
+}
+
+.sidescroll-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sidescroll-track {
+  display: flex;
+  gap: 2rem;
+  padding: 0 2rem;
+}
+
+.sidescroll-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: #262626;
+  height: 400px;
+  width: 300px;
+}
+
+@media (min-width: 768px) {
+  .sidescroll-card {
+    height: 700px;
+    width: 500px;
+  }
+}
+
+.sidescroll-card:hover {
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
+.sidescroll-card-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s;
+}
+
+.sidescroll-card:hover .sidescroll-card-image {
+  transform: scale(1.1);
+}
+
+.sidescroll-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    transparent,
+    rgba(0, 0, 0, 0.9)
+  );
+}
+
+.sidescroll-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .sidescroll-card-content {
+    padding: 2rem;
+  }
+}
+
+.sidescroll-card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .sidescroll-card-title {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.sidescroll-card-description {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 28rem;
+}
+
+@media (min-width: 768px) {
+  .sidescroll-card-description {
+    font-size: 1.125rem;
+  }
+}
